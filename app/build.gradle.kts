@@ -57,9 +57,9 @@ val sourcesJar by tasks.registering(Jar::class) {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            groupId = "com.fitmind"
-            artifactId = "hunsspell"
-            version = "1.0.0"
+            groupId = "com.github.hrithik1233"
+            artifactId = "HunSpell-android"
+            version = "v1.0.0"
 
             // Manually reference the AAR output
             artifact("$buildDir/outputs/aar/${project.name}-release.aar")
