@@ -11,12 +11,6 @@ android {
     defaultConfig {
         minSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        externalNativeBuild {
-            cmake {
-                cppFlags("-std=c++17")
-            }
-        }
     }
 
     buildTypes {
@@ -37,23 +31,16 @@ android {
     buildFeatures {
         compose = true
     }
-
-    externalNativeBuild {
-        cmake {
-            path("src/main/cpp/CMakeLists.txt")
-        }
-    }
 }
 
-
-// Sources Jar
+// Sources jar
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets["main"].java.srcDirs())
     from(android.sourceSets["main"].kotlin.srcDirs())
 }
 
-// Publish manually
+// Publishing
 publishing {
     publications {
         create<MavenPublication>("release") {
@@ -61,11 +48,13 @@ publishing {
             artifactId = "HunSpell-android"
             version = "v1.0.0"
 
-            // Manually reference the AAR output
             artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-
-            // Add sources jar
             artifact(sourcesJar.get())
         }
     }
+}
+
+// Make sure AAR exists before publishing
+tasks.withType<PublishToMavenLocal> {
+    dependsOn("assembleRelease")
 }
