@@ -1,3 +1,5 @@
+import org.gradle.util.Path.path
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -9,6 +11,22 @@ android {
     compileSdk = 36
 
     defaultConfig {
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
+
+        // 🔥 IMPORTANT (ABI support)
+        ndk {
+            abiFilters += listOf(
+                "armeabi-v7a",
+                "arm64-v8a",
+                "x86",
+                "x86_64"
+            )
+        }
+
         minSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,10 +41,17 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+            path ("src/main/cpp/CMakeLists.txt")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 
 
 
