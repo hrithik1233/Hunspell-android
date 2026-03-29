@@ -9,16 +9,27 @@ Features
 ✅ Easy integration into any Android project.
 Installation
 
-jiopack version: 
-[![](https://jitpack.io/v/hrithik1233/Hunspell-android.svg)](https://jitpack.io/#hrithik1233/Hunspell-android)
+jio verion: [![](https://jitpack.io/v/hrithik1233/Hunspell-android.svg)](https://jitpack.io/#hrithik1233/Hunspell-android)
 
+Using JitPack
 
-Add the library to your build.gradle:
- 
+Add JitPack repository to your root build.gradle:
+
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+Add the library to your module build.gradle dependencies:
 
 dependencies {
     implementation("com.github.hrithik1233:HunSpell-android:Tag")
 }
+
+Replace Tag with the version you want (e.g., v1.0.1).
+
 Usage
 Initialize
 val spellChecker = SpellChecker()
@@ -36,7 +47,18 @@ println(suggestions.joinToString()) // "example, exempt, exemplar"
 Normalize Text
 val normalized = spellChecker.normalize("  Exampel  ")
 println(normalized) // "exampel"
-ProGuard/R8
+Dictionary Files (.aff and .dic)
+
+You need HunSpell dictionary files (.aff and .dic) to use the library.
+
+Sources:
+LibreOffice Hunspell Dictionaries
+OpenOffice Hunspell Dictionaries
+GitHub - Generic Hunspell Dictionaries
+
+Download the en_US.aff and en_US.dic files and place them in your app’s assets or accessible folder.
+
+ProGuard / R8
 
 No special rules are required for this library.
 
