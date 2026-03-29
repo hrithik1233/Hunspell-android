@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.fitmind.hunsspell.Utils.HunspellLibraryUtils
 import com.fitmind.hunsspell.Utils.HunspellLibraryUtils.copyDictionary
 import com.fitmind.hunsspell.Utils.SpellChecker
 import com.fitmind.hunsspell.ui.theme.HunsSpellTheme
@@ -49,14 +50,20 @@ fun MainScreen() {
 
     // ✅ init once
     val spellChecker = remember {
-        val aff = copyDictionary(context, "en_US.aff")
-        val dic = copyDictionary(context, "en_US.dic")
+        val paths = HunspellLibraryUtils.prepareDictionaryFromRaw(
+            context = context,
+            baseName = "english",
+            affResId = R.raw.en_us_aff,
+            dicResId = R.raw.en_us_dic
+        )
 
-        Log.d("SPELL", "AFF exists: ${File(aff).exists()}")
-        Log.d("SPELL", "DIC exists: ${File(dic).exists()}")
+
+
+        Log.d("SPELL", "AFF exists: ${File(paths.affPath).exists()}")
+        Log.d("SPELL", "DIC exists: ${File(paths.dicPath).exists()}")
 
         SpellChecker().apply {
-            init(aff, dic)
+            init(paths.affPath, paths.dicPath)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.fitmind.hunsspell.Utils
 
 import android.content.Context
+import androidx.annotation.RawRes
 import java.io.File
 
 object HunspellLibraryUtils {
@@ -80,4 +81,51 @@ object HunspellLibraryUtils {
             dicPath = dicFile.absolutePath
         )
     }
+
+
+
+
+
+        /**
+         * 🔥 Copies .aff and .dic from res/raw into internal storage (if not already)
+         * and returns absolute file paths for Hunspell usage.
+         *
+         * @param baseName Used for saved file names (e.g., "english")
+         * @param affResId Resource ID of .aff file
+         * @param dicResId Resource ID of .dic file
+         */
+        fun prepareDictionaryFromRaw(
+            context: Context,
+            baseName: String,
+            @RawRes affResId: Int,
+            @RawRes dicResId: Int
+        ): DictionaryPaths {
+
+            val affFile = File(context.filesDir, "$baseName.aff")
+            val dicFile = File(context.filesDir, "$baseName.dic")
+
+            // Copy AFF if not exists
+            if (!affFile.exists()) {
+                context.resources.openRawResource(affResId).use { input ->
+                    affFile.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            }
+
+            // Copy DIC if not exists
+            if (!dicFile.exists()) {
+                context.resources.openRawResource(dicResId).use { input ->
+                    dicFile.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            }
+
+            return DictionaryPaths(
+                affPath = affFile.absolutePath,
+                dicPath = dicFile.absolutePath
+            )
+        }
+
 }
