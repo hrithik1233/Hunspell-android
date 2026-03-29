@@ -32,21 +32,33 @@ Replace Tag with the version you want (e.g., v1.0.1).
 
 Usage
 Initialize
+
 val spellChecker = SpellChecker()
+
 spellChecker.init(
     affPath = "path/to/en_US.aff",
     dicPath = "path/to/en_US.dic"
 )
+
 Check Spelling
+
 val word = "exampel"
+
 val isCorrect = spellChecker.check(word)
+
 println(isCorrect) // false
+
 Get Suggestions
 val suggestions = spellChecker.suggest("exampel")
+
 println(suggestions.joinToString()) // "example, exempt, exemplar"
+
 Normalize Text
+
 val normalized = spellChecker.normalize("  Exampel  ")
+
 println(normalized) // "exampel"
+
 Dictionary Files (.aff and .dic)
 
 You need HunSpell dictionary files (.aff and .dic) to use the library.
