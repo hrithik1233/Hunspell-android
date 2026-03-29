@@ -50,20 +50,20 @@ fun MainScreen() {
 
     // ✅ init once
     val spellChecker = remember {
-        val paths = HunspellLibraryUtils.prepareDictionaryFromRaw(
-            context = context,
-            baseName = "english",
-            affResId = R.raw.en_us_aff,
-            dicResId = R.raw.en_us_dic
-        )
-
-
-
-        Log.d("SPELL", "AFF exists: ${File(paths.affPath).exists()}")
-        Log.d("SPELL", "DIC exists: ${File(paths.dicPath).exists()}")
+//        val paths = HunspellLibraryUtils.prepareDictionaryFromRaw(
+//            context = context,
+//            baseName = "english",
+//            affResId = R.raw.en_us_aff,
+//            dicResId = R.raw.en_us_dic
+//        )
+//
+//
+//
+//        Log.d("SPELL", "AFF exists: ${File(paths.affPath).exists()}")
+//        Log.d("SPELL", "DIC exists: ${File(paths.dicPath).exists()}")
 
         SpellChecker().apply {
-            init(paths.affPath, paths.dicPath)
+           // init(paths.affPath, paths.dicPath)
         }
     }
 
