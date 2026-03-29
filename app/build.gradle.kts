@@ -28,55 +28,44 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-
-
     buildFeatures {
         compose = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.6.0" // must match Compose version
+        kotlinCompilerExtensionVersion = "1.6.0"
     }
 }
 
 dependencies {
-    // Core
     implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.activity:activity-compose:1.9.0")
-
-    // Compose
     implementation("androidx.compose.ui:ui:1.6.0")
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.0")
     debugImplementation("androidx.compose.ui:ui-tooling:1.6.0")
-
-    // Lifecycle & runtime
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0")
 }
 
-// Sources jar
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(android.sourceSets["main"].java.srcDirs())
-    from(android.sourceSets["main"].kotlin.srcDirs())
-}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                // Use findByName with a null check instead of direct access
+                val releaseComponent = components.findByName("release")
+                if (releaseComponent != null) {
+                    from(releaseComponent)
+                }
 
-// Publishing
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = "com.github.hrithik1233"
-            artifactId = "HunSpell-android"
-            version = "v1.0.0"
-
-            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-            artifact(sourcesJar.get())
+                groupId = "com.github.hrithik1233"
+                artifactId = "HunSpell-android"
+                version = "1.0.1"
+            }
         }
     }
 }
 
-// Make sure AAR exists before publishing
 tasks.withType<PublishToMavenLocal> {
     dependsOn("assembleRelease")
 }
