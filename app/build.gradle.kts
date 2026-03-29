@@ -28,12 +28,21 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+
+
     buildFeatures {
         compose = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.6.0"
+    }
+
+    // ✅ THIS is what was missing — registers the "release" component
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
 }
 
@@ -52,15 +61,10 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
-                // Use findByName with a null check instead of direct access
-                val releaseComponent = components.findByName("release")
-                if (releaseComponent != null) {
-                    from(releaseComponent)
-                }
-
+                from(components["release"]) // ✅ Now this will actually find it
                 groupId = "com.github.hrithik1233"
                 artifactId = "HunSpell-android"
-                version = "1.0.1"
+                version = "1.0.3"
             }
         }
     }
