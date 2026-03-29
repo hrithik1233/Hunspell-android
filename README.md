@@ -9,8 +9,12 @@ Features
 ✅ Easy integration into any Android project.
 Installation
 
-Add the library to your build.gradle:
+jiopack version: 
 [![](https://jitpack.io/v/hrithik1233/Hunspell-android.svg)](https://jitpack.io/#hrithik1233/Hunspell-android)
+
+
+Add the library to your build.gradle:
+ 
 
 dependencies {
     implementation("com.github.hrithik1233:HunSpell-android:Tag")
