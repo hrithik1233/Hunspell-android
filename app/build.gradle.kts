@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)
     id("maven-publish")
 }
 
@@ -53,13 +52,8 @@ android {
 
 
 
-    buildFeatures {
-        compose = false
-    }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.6.0"
-    }
+
 
     // ✅ THIS is what was missing — registers the "release" component
     publishing {
