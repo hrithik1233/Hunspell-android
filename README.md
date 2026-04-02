@@ -32,9 +32,10 @@ allprojects {
 }
 ```
 Add the library to your module build.gradle dependencies:
+
 ```
 dependencies {
-    implementation("com.github.hrithik1233:HunSpell-android:master-SNAPSHOT")
+    implementation("com.github.hrithik1233:HunSpell-android:Tag")
 }
 ```
 
