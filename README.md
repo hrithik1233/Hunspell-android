@@ -69,7 +69,8 @@ You need HunSpell dictionary files (`.aff` and `.dic`) to use the library.
 - [OpenOffice Hunspell Dictionaries](https://extensions.openoffice.org/en/project/english-dictionaries-apache-openoffice)  
 - [GitHub - Generic Hunspell Dictionaries](https://github.com/wooorm/dictionaries)  
 
-> Download the `en_US.aff` and `en_US.dic` files and place them in your app’s `assets` or any accessible folder.
+* - your specific lanuage 
+> Download the `*.aff` and `*.dic` files and place them in your app’s `assets` or any accessible folder.
 
 ---
 
