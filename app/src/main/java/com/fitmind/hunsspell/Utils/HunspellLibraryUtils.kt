@@ -1,7 +1,7 @@
 package com.fitmind.hunsspell.Utils
 
 import android.content.Context
-import androidx.annotation.RawRes
+
 import java.io.File
 
 object HunspellLibraryUtils {
@@ -91,14 +91,14 @@ object HunspellLibraryUtils {
          * and returns absolute file paths for Hunspell usage.
          *
          * @param baseName Used for saved file names (e.g., "english")
-         * @param affResId Resource ID of .aff file
-         * @param dicResId Resource ID of .dic file
+         * @param affResId Resource ID of .aff file from Raw res
+         * @param dicResId Resource ID of .dic file from Raw res
          */
         fun prepareDictionaryFromRaw(
             context: Context,
             baseName: String,
-            @RawRes affResId: Int,
-            @RawRes dicResId: Int
+             affResId: Int/**Raw res id**/,
+            dicResId: Int/**Raw res id**/
         ): DictionaryPaths {
 
             val affFile = File(context.filesDir, "$baseName.aff")
