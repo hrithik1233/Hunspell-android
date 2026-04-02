@@ -27,7 +27,7 @@ android {
             )
         }
 
-        minSdk = 31
+        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -89,7 +89,7 @@ afterEvaluate {
                 from(components["release"]) // ✅ Now this will actually find it
                 groupId = "com.github.hrithik1233"
                 artifactId = "HunSpell-android"
-                version = "1.0.3"
+                version = "1.0.8"
             }
         }
     }
